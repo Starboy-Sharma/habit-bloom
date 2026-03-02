@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { useTheme, useSound, useUser } from '../../context/AppContext';
+import { useTheme, useSound, useUser, useLogout } from '../../context/AppContext';
 import { useStreak } from '../../context/AppContext';
 
 const NAV_ITEMS = [
@@ -14,6 +14,7 @@ export default function NavBar() {
     const { soundEnabled, toggleSound } = useSound();
     const user = useUser();
     const streak = useStreak();
+    const logout = useLogout();
 
     return (
         <>
@@ -40,28 +41,34 @@ export default function NavBar() {
 
                 <div className="sidebar-footer">
                     {streak.current > 0 && (
-                        <div style={{ padding: '8px 14px', background: 'var(--lavender)', borderRadius: 'var(--radius-md)', fontSize: '13px', fontWeight: '700', color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <div className="streak-badge">
                             🔥 {streak.current} day streak
                         </div>
                     )}
-                    <div style={{ display: 'flex', gap: '8px' }}>
+                    <div className="sidebar-controls">
                         <button
-                            className="btn btn-ghost btn-sm"
+                            className="btn btn-ghost btn-sm btn-icon"
                             onClick={toggleTheme}
                             title="Toggle theme"
-                            style={{ flex: 1 }}
                         >
                             {theme === 'light' ? '🌙' : '☀️'}
                         </button>
                         <button
-                            className="btn btn-ghost btn-sm"
+                            className="btn btn-ghost btn-sm btn-icon"
                             onClick={toggleSound}
                             title="Toggle sound"
-                            style={{ flex: 1 }}
                         >
                             {soundEnabled ? '🔊' : '🔇'}
                         </button>
                     </div>
+                    <button
+                        className="btn btn-logout"
+                        onClick={logout}
+                        title="Sign out"
+                    >
+                        <span className="logout-icon">🚪</span>
+                        <span>Sign out</span>
+                    </button>
                 </div>
             </aside>
 
@@ -78,6 +85,14 @@ export default function NavBar() {
                         {label}
                     </NavLink>
                 ))}
+                <button
+                    className="bottom-nav-item logout-mobile"
+                    onClick={logout}
+                    title="Sign out"
+                >
+                    <span className="nav-icon">🚪</span>
+                    Sign out
+                </button>
             </nav>
         </>
     );

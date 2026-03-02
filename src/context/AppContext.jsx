@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     getUser, saveUser,
     getHabits, saveHabits,
@@ -7,6 +8,7 @@ import {
     getGarden, saveGarden,
     getTheme, saveTheme,
     getSoundEnabled, saveSoundEnabled,
+    clearAll,
 } from '../services/localStorage';
 import { defaultStreak, defaultGarden } from '../models';
 import { calculateStreak, getFlowerCount } from '../utils/streakUtils';
@@ -105,6 +107,14 @@ function reducer(state, action) {
             return { ...state, soundEnabled: action.payload };
         }
 
+        case 'LOGOUT': {
+            clearAll();
+            return {
+                ...initialState,
+                isLoading: false,
+            };
+        }
+
         default:
             return state;
     }
@@ -160,6 +170,15 @@ export const useSound = () => {
     const { state, dispatch } = useApp();
     const toggle = () => dispatch({ type: 'SET_SOUND', payload: !state.soundEnabled });
     return { soundEnabled: state.soundEnabled, toggleSound: toggle };
+};
+export const useLogout = () => {
+    const { dispatch } = useApp();
+    const navigate = useNavigate();
+    const logout = () => {
+        dispatch({ type: 'LOGOUT' });
+        navigate('/onboarding');
+    };
+    return logout;
 };
 export const useTodayLog = () => {
     const { dailyLogs } = useApp().state;

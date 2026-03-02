@@ -191,11 +191,60 @@ body {
 .nav-item .nav-icon { font-size: 20px; }
 
 .sidebar-footer {
-  padding: 16px 12px;
+  padding: 16px 12px 20px;
   border-top: 1px solid var(--border);
   display: flex;
   flex-direction: column;
+  gap: 12px;
+}
+
+.streak-badge {
+  padding: 8px 14px;
+  background: var(--lavender);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sidebar-controls {
+  display: flex;
   gap: 8px;
+}
+
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition);
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-logout:hover {
+  background: #fee2e2;
+  color: var(--danger);
+  border-color: var(--danger);
+  transform: translateY(-1px);
+}
+
+.btn-logout:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.logout-icon {
+  font-size: 16px;
 }
 
 /* ─── Bottom Nav (mobile) ────────────────────────────────────────────────── */
@@ -235,6 +284,18 @@ body {
 
 .bottom-nav-item.active { color: var(--primary); }
 .bottom-nav-item .nav-icon { font-size: 22px; }
+
+.bottom-nav-item.logout-mobile {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.bottom-nav-item.logout-mobile:hover {
+  background: #fee2e2;
+  color: var(--danger);
+}
 
 /* ─── Page wrapper ───────────────────────────────────────────────────────── */
 .page {

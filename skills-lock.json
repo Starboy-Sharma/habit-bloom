@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "react-best-practices": {
+      "source": "0xbigboss/claude-code",
+      "sourceType": "github",
+      "computedHash": "57fce8e3b0a0c383e011c8756f93f76810b251e7316b33902866decdf904c9f5"
+    }
+  }
+}
